@@ -36,10 +36,10 @@ function main() {
   fs.createReadStream(filename)
     .pipe(csv())
     .on("data", (row) => {
-      const user_dist = [row["user_address"], row["itemID"], row["amount"]]; // create record to track user_id of leaves
+      const user_dist = [row["user_address"], row["amount"]]; // create record to track user_id of leaves
       const leaf_hash = utils.solidityKeccak256(
-        ["address", "uint256", "uint256"],
-        [row["user_address"], row["itemID"], row["amount"]]
+        ["address", "uint256"],
+        [row["user_address"], row["amount"]]
       ); // encode base data like solidity abi.encode
       user_dist_list.push(user_dist); // add record to index tracker
       token_dist.push(leaf_hash); // add leaf hash to distribution
